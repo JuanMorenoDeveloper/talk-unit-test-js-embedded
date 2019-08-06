@@ -1,0 +1,321 @@
+= Fundamentos test unitarios
+:icons: font
+:twitter-tag: BPS
+:conference-tag: Unit test
+:talk-tag: ACCSA
+:slide-link: http://bit.ly/intro-java-unit-test
+:demo-link:
+:linkattrs:
+
+include::footer.ad[]
+
+[NOTE.speaker]
+====
+Contenido de la presentación:
+
+*	Secciones teóricas:
+**	Fundamentos. ¿Por qué usar test unitarios? Refactoring. Buenas prácticas. Niveles de test/Requisitos, Code coverage.
+**	Testing doubles. Manejo de dependencias. Dummies, Stubs, Fakes, Spies, Mocks. Prácticas recomendadas.
+*	TDD. Prácticas para mejorar los test. Red-Green-Refactor cycle. Ventajas y Desventajas.
+*	Secciones prácticas:
+**	Herramientas. JUnit – Annotations / Lifecycle. Prácticas. Mockito/Powermock. Hamcrest/Assertj.
+**	TDD Kata.
+
+====
+//== !
+//image::pattern-design-4pwbdv1y.jpg[background, size=auto]
+// Fuente: https://standaserigraf.wordpress.com/2015/09/30/pattern-design-tecnica-artistica-que-se-ocupa-de-la-creacion-de-patrones-graficos/
+
+== Contenido
+* Fundamentos
+* Testing doubles
+* TDD
+* Herramientas
+
+== ¿Por qué escribimos tests? icon:lightbulb[]
+
+== ¿Por qué escribimos tests?
+* Para asegurarnos que el código funciona
+* ... pero escribir test automatizados es mucho más trabajo que simplemente escribir el `main` y validar entradas y salidas ...
+
+== El software cambia icon:code[]
+
+* Si el software cambia, los test deben cambiar con él
+* Si cambiamos la estructura de nuestras clases, tenemos que adaptar los test, perder tiempo
+* Si añadimos nuevas funcionalidades obviamente no vamos a tener tests
+* Si arreglamos icon:bug[], al principio no vamos a tener test
+
+== Refactoring icon:magic[]
+
+No todos los cambios son funcionales
+
+*Refactor* -- Proceso de de reestructurar un código fuente, alterando su estructura interna sin cambiar su comportamiento externo.
+
+== Razones para hacer refactoring icon:magic[]
+* Reparar icon:bug[] en el código (code smells)
+* Pagar deuda técnica
+* Mejorar rendimiento
+* Actualizar API
+* ...
+
+== !
+image::refactor-catalog.PNG[background, size=auto]
+//Fuente: https://refactoring.com/catalog/
+
+== Estrategias para hacer refactoring icon:magic[]
+. Preparar el código para la nueva funcionalidad
+. Añadir la nueva funcionalidad
+
+== ¿Cuándo hacer refactoring icon:magic[]?
+. Debería ser algo de todos los días
+. Los IDEs ayudan a automatizar de manera segura refactors simples
+
+== Regla del Boyscout
+image::boy-scout-rule.jpeg[background, size=auto]
+//Fuente: https://medium.com/@biratkirat/step-8-the-boy-scout-rule-robert-c-martin-uncle-bob-9ac839778385
+
+== Refactors inseguros icon:exclamation-triangle[]
+No todos los refactors son seguros:
+
+* Inlining (efectos secundarios)
+* Cambiar dependencias
+* Cambiar algoritmos o estructuras de datos
+* ... Cualquier cambio no trivial
+
+== Refactors seguros icon:check[]
+
+Para hacer refactor seguros, *tenemos que escribir tests*
+
+No escribimos tests para asegurarnos que el código funcione
+
+*Escribimos test para asegurarnos que siga funcionando*
+
+== Usar tests icon:check[]
+Si no se escriben test se crea *código legacy*.
+
+image::legacy-code-sequence.PNG[]
+Es una relación *cíclica*.
+
+== Ciclo de refactor malo
+image::bad-refactoring-cycle.PNG[background, size=auto]
+
+== Ciclo de refactor bueno
+image::good-refactoring-cycle.PNG[background, size=auto]
+
+== Otras razones para hacer test
+
+* Es una prueba de que el código funciona.
+* Son una fuente de documentación, muestran las intenciones del código.
+* Mejoran el diseño de la aplicación.
+
+== Niveles de test
+
+* Unit tests
+* Integration tests
+* End to End tests
+* Acceptance / Business logic tests
+
+[NOTE.speaker]
+====
+* Unit tests: Prueban una sola unidad del sistema. No tienen dependencias de los componentes externos del sistema BD, WS, API. Falsifican sus dependencias.
+* Integration tests: Verifica que grupos de unidades puedan trabajar juntas correctamente.
+* End-to-End tests: Prueba flujos completos de interacciones en el sistema. Se puede considerar como extensión de los test de integración. Tiene dependencias reales a los componentes del sistema, BD, WS, APIs.
+* Acceptance / Business logic tests: Buscan responder la pregunta, ¿construimos lo que el cliente esperaba? Normalmente se centra en la historia del usuario y usan el lenguaje del negocio.
+====
+
+== ¿Qué porcentaje debo cubrir?
+
+* 70% Unit tests
+* 20% Integration
+* 10%  End to End tests
+
+== Pirámide de testing
+image::pyramid.png[background, size=auto]
+
+== ¿Qué es una unidad?
+
+* Una clase (la mayoría de las veces)
+* Muchas clases relacionadas
+* Un paquete. Usualmente solo se prueba el API público, la interna y privada se prueba de manera implícita.
+
+== Requisitos de un test
+
+* Rápido
+* Coherente
+* Modular
+* Independiente de la implementación
+
+[NOTE.speaker]
+====
+* Rápido: Los tests unitarios deben ejecutarse rápidamente. Entre más pronto y frecuente se ejecuten, más temprano se van a detectar las fallas y corregirse.
+Los tiempos de ejecución deben estar en el orden de los milisegundos. No deben tener acceso I/O y sus entradas deben ser las mínimas necesarias.
+* Coherente: Leer test deben poderse leer de manera fácil. La idea es que revelen las intenciones del código de producción.
+ Pueden ser usados como documentación. Deben estar escritos de manera estructurada y consistente.
+* Modular: Unidad debe ser lo más pequeña posible. El objetivo es buscar que los test sean lo más pequeño posible también.
+ Se prefiere escribir muchos pequeños test que grandes tests. En lo posible buscar tener un solo asssert por test (Pueden ser múltiples cuando se validan datos).
+  Los test usualmente no deberían fallar por un problema en las dependencias.
+* Independiente de la implementación: Los test deben validar la salida con respecto a una entrada.
+Normalmente no se debe cambiar un test si la implementación cambia, solo se hace si cambia la funcionalidad externa.
+  Se debe evitar escribir test que simplemente repitan el código de producción. El objetivo de los test es facilitar el refactor.
+  Preferir en lo posible test de caja negra que de caja blanca.
+** Caja negra: Se prueba la funcionalidad sin conocer su implementación.
+** Caja blanca: Se prueba conociendo los detalles de la implementación.
+====
+
+== Estructura de un test
+1. Arrange (Planificación)
+2. Act (Acción)
+3. Assert (Afirmación)
+
+== !
+[source, java]
+----
+@Test
+public void givenString_whenReverse_thenGetReverseString() {
+  String input = "abc"; // <1>
+
+  String result = StringUtils.reverse(input); //<2>
+
+  assertThat(result).isEqualTo("cba"); //<3>
+}
+----
+
+== Buenas Prácticas 1/2
+* Evitar repetir código de producción.
+* Se debe evitar escribir lógica en los test.
+* Agregar al menos un test cuando se soluciona una falla.
+
+[NOTE.speaker]
+====
+* El código de producción describe una solución general.
+* El código del test es concreto.
+* Se recomienda especificar entradas y salidas concretas en los test.
+====
+
+== Buenas Prácticas 2/2
+* Evitar hacer test de métodos privados. Se debe probar las interfaces no las implementaciones.
+* Antes de pasar, los test deben fallar.
+
+[NOTE.speaker]
+====
+* Si se requiere probar un método privado se recomienda, extraer a una clase o en última instancia cambiar a package-private.
+====
+
+== ¿Los test nos hacen lentos?
+* Los test nos ayudan a conseguir fallos. Por lo tanto, se introducen menos fallos.
+* Nos permite agregar cambios con confianza. Mejora la productividad.
+
+== Otros tipos de tests
+* Behavior-driven development
+* Property tests
+* Mutation testing
+* Design by Contract
+
+[NOTE.speaker]
+====
+* Behavior-driven development: Usa un lenguaje específico del dominio para escribir los tests. Están estructurados en features e historias.
+* Property tests: Maneja multiples entradas para validar el comportamiento de las salidas sin necesidad de fijarlas en el código.
+* Mutation testing: Cambia el código fuente de los test para ver si fallan. Valida el acoplamiento entre los test y el código fuente.
+Ofrece un mejor indicador que la cobertura.
+* Design by Contract: Valida aserciones pre y post ejecución de los métodos. Se hace control en runtime. Se puede validar en tiempo de compilación usando anotaciones.
+====
+
+== Ok. Suena genial ¿Pero cómo pruebo mis dependencias?
+
+== Testing doubles
+* Dependencias como objetos específicos de los test.
+* Dependencias simples llevan a menos errores.
+* Facilidad para controlar su comportamiento.
+* Facilidad para verificar su uso en los test.
+
+[NOTE.speaker]
+====
+* Inicializar dependencias puede llevar mucho trabajo y pueden agregar errores.
+* Pueden existir fallas en las dependencias.
+* Operaciones de I/O van a ralentizar los tests.
+* Usar las clases concretas de las dependencias van acoplar nuestros tests a la implementación.
+====
+
+== Tipos de test doubles
+* Dummies
+* Stubs
+* Spikes
+* Fakes
+* Spies
+* Mocks
+
+[NOTE.speaker]
+====
+* *Dummy*: Son objetos que se envían, pero nunca se utilizan en el test.
+Usualmente se usan para llenar parámetros.
+
+* *Stub*: Es un objeto en el que configuras que cuando llames a un método devuelva un valor determinado.
+Usualmente se usan para cosas que no importan al test.
+
+* *Fake*: Es un objeto que implementado completamente y que funciona, como un objeto normal sin ser simulado,
+pero se diferencia en que está falseando algo para hacer alguna cosa más fácil de probar.
+Un ejemplo de esto podría ser un objeto que utiliza una base de datos en memoria en lugar de acceder
+a consultar la base de datos de producción.
+
+* *Spy*: Estos objetos guardan las acciones que se hacen sobre ellos. Hace una especie de seguimiento
+sobre qué métodos se han llamado y con qué parámetros.
+
+* *Mock*: Muy similar a un spy, pero no solo guardan las acciones que se hacen sobre ellos, también es
+necesario configurar qué comportamiento esperas cuando alguien llame a alguno de sus métodos.
+====
+
+== ¿Cuál test double debo usar? 1/2
+* Se recomienda seguir el PoLP (Principio de menor privilegio)
+* Buscar la opción menos poderosa que pueda resolver el problema.
+
+[NOTE.speaker]
+====
+Beneficios de usar PoLP:
+* Declarativo
+* Seguro
+* Menos elementos
+* Resistencia al cambio
+====
+
+== ¿Cuál test double debo usar? 2/2
+* Siguiendo el principio sería:
+** ¿No necesitamos usar test doubles? Entonces no los usemos
+** ¿Me sirve un stub? Entonces uso un stub
+** ¿Necesito más control? Vamos por un fake
+** ¿Quiero controlar todo? Usemos mocks
+
+== TDD
+*Test driven development*
+
+Proceso de escribir test antes de código de producción
+
+== Red-Green-Refactor cycle
+image::tdd-cycle.jpg[]
+//Fuente: https://ayudalaravel.com/tdd-desarrollo-guiado-pruebas/
+
+== Red-Green-Refactor steps
+1. Agregar un test (Entiendo el propósito de la funcionalidad)
+2. Ejecutar todos los test y ver si el nuevo test [red]#falla# (Debería fallar por las razones conocidas)
+3. Escribir el mínimo código para que [green]#pase# el test
+4. Ejecutar nuevamente el test (Valida el punto anterior)
+5. [blue]#Refactorizar# el código (Se optimiza) *…​Repetir el proceso*
+
+== Beneficios TDD
+* Código con pruebas. No se pueden agregar nuevas funcionalidades sin test.
+* Ciclo de desarrollo rápido y seguro.
+* Confianza en el código y los tests.
+
+== Algunas Librerías Java para test
+* link:{https://junit.org/junit5/}[JUnit]
+* link:{https://site.mockito.org/}[Mockito]
+* link:{http://joel-costigliola.github.io/assertj/}[AssertJ]
+* link:{https://cucumber.io/}[Cucumber]
+
+== Conclusiones
+* El uso de test agrega calidad a los sistemas
+* Permiten hacer refactor con confianza
+* Deben ser independientes a nivel de datos
+* Mejora el diseño
+* Existen variedad de estrategias y herramientas para implementarlos
+
+include::self.ad[]

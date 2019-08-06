@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Fundamentos test unitarios</title><meta content="yes" name="apple-mobile-web-app-capable" /><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" /><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport" /><link href="reveal.js-3.7.0/css/reveal.css" rel="stylesheet" /><link rel="stylesheet" href="theme/ude.css" id="theme" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" /><style>/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+/*pre.CodeRay {background-color:#f7f7f8;}*/
+.CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
+.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
+table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
+table.CodeRay td{vertical-align: top;line-height:1.45}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
+table.CodeRay td.code{padding:0 0 0 .5em}
+table.CodeRay td.code>pre{padding:0}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}</style><link href="reveal.js-3.7.0/lib/css/zenburn.css" rel="stylesheet" /><script>var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? "reveal.js-3.7.0/css/print/pdf.css" : "reveal.js-3.7.0/css/print/paper.css";
+document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if lt IE 9]><script src="reveal.js-3.7.0/lib/js/html5shiv.js"></script><![endif]--></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>Fundamentos test unitarios</h1><div class="preamble"><script type="text/javascript">
+    window.addEventListener("load", function() {
+
+        revealDiv = document.querySelector("body div.reveal")
+        footer = document.getElementById("schauderhaft-footer");
+        revealDiv.appendChild(footer);
+
+    } );
+</script>
+<div id="schauderhaft-footer" class="footer">
+    <span class="element">BPS</span>
+    <span class="element">Unit test</span>
+    <span class="element">ACCSA</span>
+</div>
+<aside class="notes"><div class="paragraph"><p>Contenido de la presentación:</p></div>
+<div class="ulist"><ul><li><p>Secciones teóricas:</p><div class="ulist"><ul><li><p>Fundamentos. ¿Por qué usar test unitarios? Refactoring. Buenas prácticas. Niveles de test/Requisitos, Code coverage.</p></li><li><p>Testing doubles. Manejo de dependencias. Dummies, Stubs, Fakes, Spies, Mocks. Prácticas recomendadas.</p></li></ul></div></li><li><p>TDD. Prácticas para mejorar los test. Red-Green-Refactor cycle. Ventajas y Desventajas.</p></li><li><p>Secciones prácticas:</p><div class="ulist"><ul><li><p>Herramientas. JUnit – Annotations / Lifecycle. Prácticas. Mockito/Powermock. Hamcrest/Assertj.</p></li><li><p>TDD Kata.</p></li></ul></div></li></ul></div></aside></div></section>
+<section id="contenido"><h2>Contenido</h2><div class="ulist"><ul><li><p>Fundamentos</p></li><li><p>Testing doubles</p></li><li><p>TDD</p></li><li><p>Herramientas</p></li></ul></div></section>
+<section id="por_qu_escribimos_tests"><h2>¿Por qué escribimos tests? <span class="icon"><i class="fa fa-lightbulb"></i></span></h2></section>
+<section id="por_qu_escribimos_tests_2"><h2>¿Por qué escribimos tests?</h2><div class="ulist"><ul><li><p>Para asegurarnos que el código funciona</p></li><li><p>&#8230;&#8203; pero escribir test automatizados es mucho más trabajo que simplemente escribir el <code>main</code> y validar entradas y salidas &#8230;&#8203;</p></li></ul></div></section>
+<section id="el_software_cambia"><h2>El software cambia <span class="icon"><i class="fa fa-code"></i></span></h2><div class="ulist"><ul><li><p>Si el software cambia, los test deben cambiar con él</p></li><li><p>Si cambiamos la estructura de nuestras clases, tenemos que adaptar los test, perder tiempo</p></li><li><p>Si añadimos nuevas funcionalidades obviamente no vamos a tener tests</p></li><li><p>Si arreglamos <span class="icon"><i class="fa fa-bug"></i></span>, al principio no vamos a tener test</p></li></ul></div></section>
+<section id="refactoring"><h2>Refactoring <span class="icon"><i class="fa fa-magic"></i></span></h2><div class="paragraph"><p>No todos los cambios son funcionales</p></div>
+<div class="paragraph"><p><strong>Refactor</strong>&#8201;&#8212;&#8201;Proceso de de reestructurar un código fuente, alterando su estructura interna sin cambiar su comportamiento externo.</p></div></section>
+<section id="razones_para_hacer_refactoring"><h2>Razones para hacer refactoring <span class="icon"><i class="fa fa-magic"></i></span></h2><div class="ulist"><ul><li><p>Reparar <span class="icon"><i class="fa fa-bug"></i></span> en el código (code smells)</p></li><li><p>Pagar deuda técnica</p></li><li><p>Mejorar rendimiento</p></li><li><p>Actualizar API</p></li><li><p>&#8230;&#8203;</p></li></ul></div></section>
+<section data-background-image="images/refactor-catalog.PNG" data-background-size="auto"></section>
+<section id="estrategias_para_hacer_refactoring"><h2>Estrategias para hacer refactoring <span class="icon"><i class="fa fa-magic"></i></span></h2><div class="olist arabic"><ol class="arabic"><li><p>Preparar el código para la nueva funcionalidad</p></li><li><p>Añadir la nueva funcionalidad</p></li></ol></div></section>
+<section id="cundo_hacer_refactoring"><h2>¿Cuándo hacer refactoring <span class="icon"><i class="fa fa-magic"></i></span>?</h2><div class="olist arabic"><ol class="arabic"><li><p>Debería ser algo de todos los días</p></li><li><p>Los IDEs ayudan a automatizar de manera segura refactors simples</p></li></ol></div></section>
+<section id="regla_del_boyscout" data-background-image="images/boy-scout-rule.jpeg" data-background-size="auto"><h2>Regla del Boyscout</h2></section>
+<section id="refactors_inseguros"><h2>Refactors inseguros <span class="icon"><i class="fa fa-exclamation-triangle"></i></span></h2><div class="paragraph"><p>No todos los refactors son seguros:</p></div>
+<div class="ulist"><ul><li><p>Inlining (efectos secundarios)</p></li><li><p>Cambiar dependencias</p></li><li><p>Cambiar algoritmos o estructuras de datos</p></li><li><p>&#8230;&#8203; Cualquier cambio no trivial</p></li></ul></div></section>
+<section id="refactors_seguros"><h2>Refactors seguros <span class="icon"><i class="fa fa-check"></i></span></h2><div class="paragraph"><p>Para hacer refactor seguros, <strong>tenemos que escribir tests</strong></p></div>
+<div class="paragraph"><p>No escribimos tests para asegurarnos que el código funcione</p></div>
+<div class="paragraph"><p><strong>Escribimos test para asegurarnos que siga funcionando</strong></p></div></section>
+<section id="usar_tests"><h2>Usar tests <span class="icon"><i class="fa fa-check"></i></span></h2><div class="paragraph"><p>Si no se escriben test se crea <strong>código legacy</strong>.</p></div>
+<div class="imageblock" style=""><img src="images/legacy-code-sequence.PNG" alt="legacy code sequence" /></div>
+<div class="paragraph"><p>Es una relación <strong>cíclica</strong>.</p></div></section>
+<section id="ciclo_de_refactor_malo" data-background-image="images/bad-refactoring-cycle.PNG" data-background-size="auto"><h2>Ciclo de refactor malo</h2></section>
+<section id="ciclo_de_refactor_bueno" data-background-image="images/good-refactoring-cycle.PNG" data-background-size="auto"><h2>Ciclo de refactor bueno</h2></section>
+<section id="otras_razones_para_hacer_test"><h2>Otras razones para hacer test</h2><div class="ulist"><ul><li><p>Es una prueba de que el código funciona.</p></li><li><p>Son una fuente de documentación, muestran las intenciones del código.</p></li><li><p>Mejoran el diseño de la aplicación.</p></li></ul></div></section>
+<section id="niveles_de_test"><h2>Niveles de test</h2><div class="ulist"><ul><li><p>Unit tests</p></li><li><p>Integration tests</p></li><li><p>End to End tests</p></li><li><p>Acceptance / Business logic tests</p></li></ul></div>
+<aside class="notes"><div class="ulist"><ul><li><p>Unit tests: Prueban una sola unidad del sistema. No tienen dependencias de los componentes externos del sistema BD, WS, API. Falsifican sus dependencias.</p></li><li><p>Integration tests: Verifica que grupos de unidades puedan trabajar juntas correctamente.</p></li><li><p>End-to-End tests: Prueba flujos completos de interacciones en el sistema. Se puede considerar como extensión de los test de integración. Tiene dependencias reales a los componentes del sistema, BD, WS, APIs.</p></li><li><p>Acceptance / Business logic tests: Buscan responder la pregunta, ¿construimos lo que el cliente esperaba? Normalmente se centra en la historia del usuario y usan el lenguaje del negocio.</p></li></ul></div></aside></section>
+<section id="qu_porcentaje_debo_cubrir"><h2>¿Qué porcentaje debo cubrir?</h2><div class="ulist"><ul><li><p>70% Unit tests</p></li><li><p>20% Integration</p></li><li><p>10%  End to End tests</p></li></ul></div></section>
+<section id="pirmide_de_testing" data-background-image="images/pyramid.png" data-background-size="auto"><h2>Pirámide de testing</h2></section>
+<section id="qu_es_una_unidad"><h2>¿Qué es una unidad?</h2><div class="ulist"><ul><li><p>Una clase (la mayoría de las veces)</p></li><li><p>Muchas clases relacionadas</p></li><li><p>Un paquete. Usualmente solo se prueba el API público, la interna y privada se prueba de manera implícita.</p></li></ul></div></section>
+<section id="requisitos_de_un_test"><h2>Requisitos de un test</h2><div class="ulist"><ul><li><p>Rápido</p></li><li><p>Coherente</p></li><li><p>Modular</p></li><li><p>Independiente de la implementación</p></li></ul></div>
+<aside class="notes"><div class="ulist"><ul><li><p>Rápido: Los tests unitarios deben ejecutarse rápidamente. Entre más pronto y frecuente se ejecuten, más temprano se van a detectar las fallas y corregirse.
+Los tiempos de ejecución deben estar en el orden de los milisegundos. No deben tener acceso I/O y sus entradas deben ser las mínimas necesarias.</p></li><li><p>Coherente: Leer test deben poderse leer de manera fácil. La idea es que revelen las intenciones del código de producción.
+Pueden ser usados como documentación. Deben estar escritos de manera estructurada y consistente.</p></li><li><p>Modular: Unidad debe ser lo más pequeña posible. El objetivo es buscar que los test sean lo más pequeño posible también.
+Se prefiere escribir muchos pequeños test que grandes tests. En lo posible buscar tener un solo asssert por test (Pueden ser múltiples cuando se validan datos).
+ Los test usualmente no deberían fallar por un problema en las dependencias.</p></li><li><p>Independiente de la implementación: Los test deben validar la salida con respecto a una entrada.
+Normalmente no se debe cambiar un test si la implementación cambia, solo se hace si cambia la funcionalidad externa.
+  Se debe evitar escribir test que simplemente repitan el código de producción. El objetivo de los test es facilitar el refactor.
+  Preferir en lo posible test de caja negra que de caja blanca.</p><div class="ulist"><ul><li><p>Caja negra: Se prueba la funcionalidad sin conocer su implementación.</p></li><li><p>Caja blanca: Se prueba conociendo los detalles de la implementación.</p></li></ul></div></li></ul></div></aside></section>
+<section id="estructura_de_un_test"><h2>Estructura de un test</h2><div class="olist arabic"><ol class="arabic"><li><p>Arrange (Planificación)</p></li><li><p>Act (Acción)</p></li><li><p>Assert (Afirmación)</p></li></ol></div></section>
+<section><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="java language-java"><span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> givenString_whenReverse_thenGetReverseString() {
+  <span class="predefined-type">String</span> input = <span class="string"><span class="delimiter">&quot;</span><span class="content">abc</span><span class="delimiter">&quot;</span></span>; <i class="conum" data-value="1"></i><b>(1)</b>
+
+  <span class="predefined-type">String</span> result = StringUtils.reverse(input); <i class="conum" data-value="2"></i><b>(2)</b>
+
+  assertThat(result).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">cba</span><span class="delimiter">&quot;</span></span>); <i class="conum" data-value="3"></i><b>(3)</b>
+}</code></pre></div></div></section>
+<section id="buenas_prcticas_12"><h2>Buenas Prácticas 1/2</h2><div class="ulist"><ul><li><p>Evitar repetir código de producción.</p></li><li><p>Se debe evitar escribir lógica en los test.</p></li><li><p>Agregar al menos un test cuando se soluciona una falla.</p></li></ul></div>
+<aside class="notes"><div class="ulist"><ul><li><p>El código de producción describe una solución general.</p></li><li><p>El código del test es concreto.</p></li><li><p>Se recomienda especificar entradas y salidas concretas en los test.</p></li></ul></div></aside></section>
+<section id="buenas_prcticas_22"><h2>Buenas Prácticas 2/2</h2><div class="ulist"><ul><li><p>Evitar hacer test de métodos privados. Se debe probar las interfaces no las implementaciones.</p></li><li><p>Antes de pasar, los test deben fallar.</p></li></ul></div>
+<aside class="notes"><div class="ulist"><ul><li><p>Si se requiere probar un método privado se recomienda, extraer a una clase o en última instancia cambiar a package-private.</p></li></ul></div></aside></section>
+<section id="los_test_nos_hacen_lentos"><h2>¿Los test nos hacen lentos?</h2><div class="ulist"><ul><li><p>Los test nos ayudan a conseguir fallos. Por lo tanto, se introducen menos fallos.</p></li><li><p>Nos permite agregar cambios con confianza. Mejora la productividad.</p></li></ul></div></section>
+<section id="otros_tipos_de_tests"><h2>Otros tipos de tests</h2><div class="ulist"><ul><li><p>Behavior-driven development</p></li><li><p>Property tests</p></li><li><p>Mutation testing</p></li><li><p>Design by Contract</p></li></ul></div>
+<aside class="notes"><div class="ulist"><ul><li><p>Behavior-driven development: Usa un lenguaje específico del dominio para escribir los tests. Están estructurados en features e historias.</p></li><li><p>Property tests: Maneja multiples entradas para validar el comportamiento de las salidas sin necesidad de fijarlas en el código.</p></li><li><p>Mutation testing: Cambia el código fuente de los test para ver si fallan. Valida el acoplamiento entre los test y el código fuente.
+Ofrece un mejor indicador que la cobertura.</p></li><li><p>Design by Contract: Valida aserciones pre y post ejecución de los métodos. Se hace control en runtime. Se puede validar en tiempo de compilación usando anotaciones.</p></li></ul></div></aside></section>
+<section id="ok_suena_genial_pero_cmo_pruebo_mis_dependencias"><h2>Ok. Suena genial ¿Pero cómo pruebo mis dependencias?</h2></section>
+<section id="testing_doubles"><h2>Testing doubles</h2><div class="ulist"><ul><li><p>Dependencias como objetos específicos de los test.</p></li><li><p>Dependencias simples llevan a menos errores.</p></li><li><p>Facilidad para controlar su comportamiento.</p></li><li><p>Facilidad para verificar su uso en los test.</p></li></ul></div>
+<aside class="notes"><div class="ulist"><ul><li><p>Inicializar dependencias puede llevar mucho trabajo y pueden agregar errores.</p></li><li><p>Pueden existir fallas en las dependencias.</p></li><li><p>Operaciones de I/O van a ralentizar los tests.</p></li><li><p>Usar las clases concretas de las dependencias van acoplar nuestros tests a la implementación.</p></li></ul></div></aside></section>
+<section id="tipos_de_test_doubles"><h2>Tipos de test doubles</h2><div class="ulist"><ul><li><p>Dummies</p></li><li><p>Stubs</p></li><li><p>Spikes</p></li><li><p>Fakes</p></li><li><p>Spies</p></li><li><p>Mocks</p></li></ul></div>
+<aside class="notes"><div class="ulist"><ul><li><p><strong>Dummy</strong>: Son objetos que se envían, pero nunca se utilizan en el test.
+Usualmente se usan para llenar parámetros.</p></li><li><p><strong>Stub</strong>: Es un objeto en el que configuras que cuando llames a un método devuelva un valor determinado.
+Usualmente se usan para cosas que no importan al test.</p></li><li><p><strong>Fake</strong>: Es un objeto que implementado completamente y que funciona, como un objeto normal sin ser simulado,
+pero se diferencia en que está falseando algo para hacer alguna cosa más fácil de probar.
+Un ejemplo de esto podría ser un objeto que utiliza una base de datos en memoria en lugar de acceder
+a consultar la base de datos de producción.</p></li><li><p><strong>Spy</strong>: Estos objetos guardan las acciones que se hacen sobre ellos. Hace una especie de seguimiento
+sobre qué métodos se han llamado y con qué parámetros.</p></li><li><p><strong>Mock</strong>: Muy similar a un spy, pero no solo guardan las acciones que se hacen sobre ellos, también es
+necesario configurar qué comportamiento esperas cuando alguien llame a alguno de sus métodos.</p></li></ul></div></aside></section>
+<section id="cul_test_double_debo_usar_12"><h2>¿Cuál test double debo usar? 1/2</h2><div class="ulist"><ul><li><p>Se recomienda seguir el PoLP (Principio de menor privilegio)</p></li><li><p>Buscar la opción menos poderosa que pueda resolver el problema.</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>Beneficios de usar PoLP:
+* Declarativo
+* Seguro
+* Menos elementos
+* Resistencia al cambio</p></div></aside></section>
+<section id="cul_test_double_debo_usar_22"><h2>¿Cuál test double debo usar? 2/2</h2><div class="ulist"><ul><li><p>Siguiendo el principio sería:</p><div class="ulist"><ul><li><p>¿No necesitamos usar test doubles? Entonces no los usemos</p></li><li><p>¿Me sirve un stub? Entonces uso un stub</p></li><li><p>¿Necesito más control? Vamos por un fake</p></li><li><p>¿Quiero controlar todo? Usemos mocks</p></li></ul></div></li></ul></div></section>
+<section id="tdd"><h2>TDD</h2><div class="paragraph"><p><strong>Test driven development</strong></p></div>
+<div class="paragraph"><p>Proceso de escribir test antes de código de producción</p></div></section>
+<section id="red_green_refactor_cycle"><h2>Red-Green-Refactor cycle</h2><div class="imageblock" style=""><img src="images/tdd-cycle.jpg" alt="tdd cycle" /></div></section>
+<section id="red_green_refactor_steps"><h2>Red-Green-Refactor steps</h2><div class="olist arabic"><ol class="arabic"><li><p>Agregar un test (Entiendo el propósito de la funcionalidad)</p></li><li><p>Ejecutar todos los test y ver si el nuevo test <span class="red">falla</span> (Debería fallar por las razones conocidas)</p></li><li><p>Escribir el mínimo código para que <span class="green">pase</span> el test</p></li><li><p>Ejecutar nuevamente el test (Valida el punto anterior)</p></li><li><p><span class="blue">Refactorizar</span> el código (Se optimiza) <strong>…​Repetir el proceso</strong></p></li></ol></div></section>
+<section id="beneficios_tdd"><h2>Beneficios TDD</h2><div class="ulist"><ul><li><p>Código con pruebas. No se pueden agregar nuevas funcionalidades sin test.</p></li><li><p>Ciclo de desarrollo rápido y seguro.</p></li><li><p>Confianza en el código y los tests.</p></li></ul></div></section>
+<section id="algunas_libreras_java_para_test"><h2>Algunas Librerías Java para test</h2><div class="ulist"><ul><li><p><a href="{https://junit.org/junit5/}">JUnit</a></p></li><li><p><a href="{https://site.mockito.org/}">Mockito</a></p></li><li><p><a href="{http://joel-costigliola.github.io/assertj/}">AssertJ</a></p></li><li><p><a href="{https://cucumber.io/}">Cucumber</a></p></li></ul></div></section>
+<section id="conclusiones"><h2>Conclusiones</h2><div class="ulist"><ul><li><p>El uso de test agrega calidad a los sistemas</p></li><li><p>Permiten hacer refactor con confianza</p></li><li><p>Deben ser independientes a nivel de datos</p></li><li><p>Mejora el diseño</p></li><li><p>Existen variedad de estrategias y herramientas para implementarlos</p></li></ul></div></section>
+<section id="juan_moreno"><h2>Juan Moreno</h2><span>
+<img src="images/accsa-logo.jpg" style="vertical-align: middle; border:none;" width="200"/>
+<div class="ulist"><ul><li><p>Fuentes:</p><div class="ulist"><ul><li><p><a href="{https://webcourse.cs.technion.ac.il/236700/Spring2018/ho.html}">236700 - Software Design, Spring2018 - Course Material</a></p></li><li><p><a href="{https://refactoring.com}">Refactoring</a></p></li><li><p><a href="{http://www.javiergarzas.com/2015/09/dummies-vs-stubs-vs-mocks-vs-spies-vs-fakes.html}">Javier Garzas - Dependencias en pruebas unitarias</a></p></li></ul></div></li><li><p><a href="http://bit.ly/intro-java-unit-test">Presentación online en: http://bit.ly/intro-java-unit-test</a></p></li></ul></div></section></div></div><script src="reveal.js-3.7.0/lib/js/head.min.js"></script><script src="reveal.js-3.7.0/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: true,
+  // Display a presentation progress bar
+  progress: true,
+  // Set a per-slide timing for speaker notes, null means none
+  defaultTiming: null,
+  // Display the page number of the current slide
+  slideNumber: false,
+  // Push each slide change to the browser history
+  history: true,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Randomizes the order of slides each time the presentation loads
+  shuffle: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Flags if we should show a help overlay when the questionmark
+  // key is pressed
+  help: true,
+  // Flags if speaker notes should be visible to all viewers
+  showNotes: false,
+  // Global override for autolaying embedded media (video/audio/iframe)
+  // - null: Media will only autoplay if data-autoplay is present
+  // - true: All media will autoplay, regardless of individual setting
+  // - false: No media will autoplay, regardless of individual setting
+  autoPlayMedia: null,
+  // Number of milliseconds between automatically proceeding to the
+  // next slide, disabled when set to 0, this value can be overwritten
+  // by using a data-autoslide attribute on your slides
+  autoSlide: 0,
+  // Stop auto-sliding after user input
+  autoSlideStoppable: true,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: false,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
+  // NOTE setting the theme in the config no longer works in reveal.js 3.x
+  //theme: Reveal.getQueryHash().theme || 'black',
+  // Transition style (e.g., none, fade, slide, convex, concave, zoom)
+  transition: Reveal.getQueryHash().transition || 'linear',
+  // Transition speed (e.g., default, fast, slow)
+  transitionSpeed: 'default',
+  // Transition style for full page slide backgrounds (e.g., none, fade, slide, convex, concave, zoom)
+  backgroundTransition: 'fade',
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image (e.g., "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'")
+  parallaxBackgroundImage: '',
+  // Parallax background size in CSS syntax (e.g., "2100px 900px")
+  parallaxBackgroundSize: '',
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: 1280,
+  height: 720,
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  // Optional libraries used to extend on reveal.js
+  dependencies: [
+      { src: 'reveal.js-3.7.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'reveal.js-3.7.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js-3.7.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      
+      { src: 'reveal.js-3.7.0/plugin/zoom-js/zoom.js', async: true },
+      { src: 'reveal.js-3.7.0/plugin/notes/notes.js', async: true }
+  ]
+});</script></body></html>
