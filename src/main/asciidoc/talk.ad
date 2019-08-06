@@ -1,9 +1,9 @@
 = Fundamentos test unitarios
 :icons: font
-:twitter-tag: BPS
+:twitter-tag: & JS
 :conference-tag: Unit test
 :talk-tag: ACCSA
-:slide-link: http://bit.ly/intro-java-unit-test
+:slide-link: http://bit.ly/unit-test-js-arduino
 :demo-link:
 :linkattrs:
 
@@ -168,17 +168,54 @@ Normalmente no se debe cambiar un test si la implementación cambia, solo se hac
 3. Assert (Afirmación)
 
 == !
-[source, java]
+[source, js]
 ----
-@Test
-public void givenString_whenReverse_thenGetReverseString() {
-  String input = "abc"; // <1>
+import {expect} from "chai";
+import { add } from "../src";
 
-  String result = StringUtils.reverse(input); //<2>
+describe('add.js usage suite', () => {
+  it('given two numbers when add then get result', () => {
+    const n1 = 2, n2 = 3, expected = 5;
+    const calc = new Calculator(); //<1>
 
-  assertThat(result).isEqualTo("cba"); //<3>
-}
+    const result = calc.add(n1, n2); //<2>
+
+    expect(result).to.equal(expected); //<3>
+  });
+});
 ----
+
+== `npm test` -> OK
+```
+  add.js usage suite
+    √ given two numbers when add then get result
+
+
+  1 passing (32ms)
+```
+
+== `npm test` -> No OK
+```
+add.js usage suite
+    1) given two numbers when add then get result
+
+
+  0 passing (38ms)
+  1 failing
+
+  1) add.js usage suite
+       given two numbers when add then get result:
+
+      AssertionError: expected 5 to equal 56
+      + expected - actual
+
+      -5
+      +56
+
+      at Context.equal (test/index.spec.js:10:23)
+
+npm ERR! Test failed.  See above for more details.
+```
 
 == Buenas Prácticas 1/2
 * Evitar repetir código de producción.
@@ -305,11 +342,16 @@ image::tdd-cycle.jpg[]
 * Ciclo de desarrollo rápido y seguro.
 * Confianza en el código y los tests.
 
-== Algunas Librerías Java para test
-* link:{https://junit.org/junit5/}[JUnit]
-* link:{https://site.mockito.org/}[Mockito]
-* link:{http://joel-costigliola.github.io/assertj/}[AssertJ]
-* link:{https://cucumber.io/}[Cucumber]
+== Algunas Librerías de Testing para JS
+* link:{https://mochajs.org/}[Mocha]
+* link:{https://jestjs.io/}[Jest]
+* link:{https://jasmine.github.io/}[Jasmine]
+* link:{https://www.chaijs.com/}[Chai]
+* link:{https://qunitjs.com/}[QUnit]
+
+== Algunas Librerías de Testing para Arduino
+* link:{https://github.com/ianfixes/arduino_ci}[arduino_ci]
+* link:{https://github.com/mmurdoch/arduinounit}[ArduinoUnit]
 
 == Conclusiones
 * El uso de test agrega calidad a los sistemas

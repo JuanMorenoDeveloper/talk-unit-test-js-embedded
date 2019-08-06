@@ -100,7 +100,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if 
     } );
 </script>
 <div id="schauderhaft-footer" class="footer">
-    <span class="element">BPS</span>
+    <span class="element"><i class="fa fa-laptop"></i> &amp; JS</span>
     <span class="element">Unit test</span>
     <span class="element">ACCSA</span>
 </div>
@@ -143,14 +143,43 @@ Normalmente no se debe cambiar un test si la implementación cambia, solo se hac
   Se debe evitar escribir test que simplemente repitan el código de producción. El objetivo de los test es facilitar el refactor.
   Preferir en lo posible test de caja negra que de caja blanca.</p><div class="ulist"><ul><li><p>Caja negra: Se prueba la funcionalidad sin conocer su implementación.</p></li><li><p>Caja blanca: Se prueba conociendo los detalles de la implementación.</p></li></ul></div></li></ul></div></aside></section>
 <section id="estructura_de_un_test"><h2>Estructura de un test</h2><div class="olist arabic"><ol class="arabic"><li><p>Arrange (Planificación)</p></li><li><p>Act (Acción)</p></li><li><p>Assert (Afirmación)</p></li></ol></div></section>
-<section><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="java language-java"><span class="annotation">@Test</span>
-<span class="directive">public</span> <span class="type">void</span> givenString_whenReverse_thenGetReverseString() {
-  <span class="predefined-type">String</span> input = <span class="string"><span class="delimiter">&quot;</span><span class="content">abc</span><span class="delimiter">&quot;</span></span>; <i class="conum" data-value="1"></i><b>(1)</b>
+<section><div class="listingblock"><div class="content"><pre class="CodeRay"><code class="js language-js"><span class="reserved">import</span> {expect} from <span class="string"><span class="delimiter">&quot;</span><span class="content">chai</span><span class="delimiter">&quot;</span></span>;
+<span class="reserved">import</span> { add } from <span class="string"><span class="delimiter">&quot;</span><span class="content">../src</span><span class="delimiter">&quot;</span></span>;
 
-  <span class="predefined-type">String</span> result = StringUtils.reverse(input); <i class="conum" data-value="2"></i><b>(2)</b>
+describe(<span class="string"><span class="delimiter">'</span><span class="content">add.js usage suite</span><span class="delimiter">'</span></span>, () =&gt; {
+  it(<span class="string"><span class="delimiter">'</span><span class="content">given two numbers when add then get result</span><span class="delimiter">'</span></span>, () =&gt; {
+    const n1 = <span class="integer">2</span>, n2 = <span class="integer">3</span>, expected = <span class="integer">5</span>;
+    const calc = <span class="keyword">new</span> Calculator(); <i class="conum" data-value="1"></i><b>(1)</b>
 
-  assertThat(result).isEqualTo(<span class="string"><span class="delimiter">&quot;</span><span class="content">cba</span><span class="delimiter">&quot;</span></span>); <i class="conum" data-value="3"></i><b>(3)</b>
-}</code></pre></div></div></section>
+    const result = calc.add(n1, n2); <i class="conum" data-value="2"></i><b>(2)</b>
+
+    expect(result).to.equal(expected); <i class="conum" data-value="3"></i><b>(3)</b>
+  });
+});</code></pre></div></div></section>
+<section id="npm_test_ok"><h2><code>npm test</code> &#8594; OK</h2><div class="listingblock"><div class="content"><pre class="CodeRay"><code>  add.js usage suite
+    √ given two numbers when add then get result
+
+
+  1 passing (32ms)</code></pre></div></div></section>
+<section id="npm_test_no_ok"><h2><code>npm test</code> &#8594; No OK</h2><div class="listingblock"><div class="content"><pre class="CodeRay"><code>add.js usage suite
+    1) given two numbers when add then get result
+
+
+  0 passing (38ms)
+  1 failing
+
+  1) add.js usage suite
+       given two numbers when add then get result:
+
+      AssertionError: expected 5 to equal 56
+      + expected - actual
+
+      -5
+      +56
+
+      at Context.equal (test/index.spec.js:10:23)
+
+npm ERR! Test failed.  See above for more details.</code></pre></div></div></section>
 <section id="buenas_prcticas_12"><h2>Buenas Prácticas 1/2</h2><div class="ulist"><ul><li><p>Evitar repetir código de producción.</p></li><li><p>Se debe evitar escribir lógica en los test.</p></li><li><p>Agregar al menos un test cuando se soluciona una falla.</p></li></ul></div>
 <aside class="notes"><div class="ulist"><ul><li><p>El código de producción describe una solución general.</p></li><li><p>El código del test es concreto.</p></li><li><p>Se recomienda especificar entradas y salidas concretas en los test.</p></li></ul></div></aside></section>
 <section id="buenas_prcticas_22"><h2>Buenas Prácticas 2/2</h2><div class="ulist"><ul><li><p>Evitar hacer test de métodos privados. Se debe probar las interfaces no las implementaciones.</p></li><li><p>Antes de pasar, los test deben fallar.</p></li></ul></div>
@@ -183,11 +212,12 @@ necesario configurar qué comportamiento esperas cuando alguien llame a alguno d
 <section id="red_green_refactor_cycle"><h2>Red-Green-Refactor cycle</h2><div class="imageblock" style=""><img src="images/tdd-cycle.jpg" alt="tdd cycle" /></div></section>
 <section id="red_green_refactor_steps"><h2>Red-Green-Refactor steps</h2><div class="olist arabic"><ol class="arabic"><li><p>Agregar un test (Entiendo el propósito de la funcionalidad)</p></li><li><p>Ejecutar todos los test y ver si el nuevo test <span class="red">falla</span> (Debería fallar por las razones conocidas)</p></li><li><p>Escribir el mínimo código para que <span class="green">pase</span> el test</p></li><li><p>Ejecutar nuevamente el test (Valida el punto anterior)</p></li><li><p><span class="blue">Refactorizar</span> el código (Se optimiza) <strong>…​Repetir el proceso</strong></p></li></ol></div></section>
 <section id="beneficios_tdd"><h2>Beneficios TDD</h2><div class="ulist"><ul><li><p>Código con pruebas. No se pueden agregar nuevas funcionalidades sin test.</p></li><li><p>Ciclo de desarrollo rápido y seguro.</p></li><li><p>Confianza en el código y los tests.</p></li></ul></div></section>
-<section id="algunas_libreras_java_para_test"><h2>Algunas Librerías Java para test</h2><div class="ulist"><ul><li><p><a href="{https://junit.org/junit5/}">JUnit</a></p></li><li><p><a href="{https://site.mockito.org/}">Mockito</a></p></li><li><p><a href="{http://joel-costigliola.github.io/assertj/}">AssertJ</a></p></li><li><p><a href="{https://cucumber.io/}">Cucumber</a></p></li></ul></div></section>
+<section id="algunas_libreras_de_testing_para_js"><h2>Algunas Librerías de Testing para JS</h2><div class="ulist"><ul><li><p><a href="{https://mochajs.org/}">Mocha</a></p></li><li><p><a href="{https://jestjs.io/}">Jest</a></p></li><li><p><a href="{https://jasmine.github.io/}">Jasmine</a></p></li><li><p><a href="{https://www.chaijs.com/}">Chai</a></p></li><li><p><a href="{https://qunitjs.com/}">QUnit</a></p></li></ul></div></section>
+<section id="algunas_libreras_de_testing_para_arduino"><h2>Algunas Librerías de Testing para Arduino</h2><div class="ulist"><ul><li><p><a href="{https://github.com/ianfixes/arduino_ci}">arduino_ci</a></p></li><li><p><a href="{https://github.com/mmurdoch/arduinounit}">ArduinoUnit</a></p></li></ul></div></section>
 <section id="conclusiones"><h2>Conclusiones</h2><div class="ulist"><ul><li><p>El uso de test agrega calidad a los sistemas</p></li><li><p>Permiten hacer refactor con confianza</p></li><li><p>Deben ser independientes a nivel de datos</p></li><li><p>Mejora el diseño</p></li><li><p>Existen variedad de estrategias y herramientas para implementarlos</p></li></ul></div></section>
 <section id="juan_moreno"><h2>Juan Moreno</h2><span>
 <img src="images/accsa-logo.jpg" style="vertical-align: middle; border:none;" width="200"/>
-<div class="ulist"><ul><li><p>Fuentes:</p><div class="ulist"><ul><li><p><a href="{https://webcourse.cs.technion.ac.il/236700/Spring2018/ho.html}">236700 - Software Design, Spring2018 - Course Material</a></p></li><li><p><a href="{https://refactoring.com}">Refactoring</a></p></li><li><p><a href="{http://www.javiergarzas.com/2015/09/dummies-vs-stubs-vs-mocks-vs-spies-vs-fakes.html}">Javier Garzas - Dependencias en pruebas unitarias</a></p></li></ul></div></li><li><p><a href="http://bit.ly/intro-java-unit-test">Presentación online en: http://bit.ly/intro-java-unit-test</a></p></li></ul></div></section></div></div><script src="reveal.js-3.7.0/lib/js/head.min.js"></script><script src="reveal.js-3.7.0/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+<div class="ulist"><ul><li><p>Fuentes:</p><div class="ulist"><ul><li><p><a href="{https://webcourse.cs.technion.ac.il/236700/Spring2018/ho.html}">236700 - Software Design, Spring2018 - Course Material</a></p></li><li><p><a href="{https://refactoring.com}">Refactoring</a></p></li><li><p><a href="{http://www.javiergarzas.com/2015/09/dummies-vs-stubs-vs-mocks-vs-spies-vs-fakes.html}">Javier Garzas - Dependencias en pruebas unitarias</a></p></li></ul></div></li><li><p><a href="http://bit.ly/unit-test-js-arduino">Presentación online en: http://bit.ly/unit-test-js-arduino</a></p></li></ul></div></section></div></div><script src="reveal.js-3.7.0/lib/js/head.min.js"></script><script src="reveal.js-3.7.0/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
 Reveal.initialize({
   // Display controls in the bottom right corner
   controls: true,
