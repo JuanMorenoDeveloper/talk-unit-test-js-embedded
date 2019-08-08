@@ -4,8 +4,8 @@
 <img src="images/accsa-logo.jpg" style="vertical-align: middle; border:none;" width="200"/>
 ++++
 * Fuentes:
-** link:{https://webcourse.cs.technion.ac.il/236700/Spring2018/ho.html}[236700 - Software Design, Spring2018 - Course Material]
-** link:{https://refactoring.com}[Refactoring]
-** link:{http://www.javiergarzas.com/2015/09/dummies-vs-stubs-vs-mocks-vs-spies-vs-fakes.html}[Javier Garzas - Dependencias en pruebas unitarias]
+** https://webcourse.cs.technion.ac.il/236700/Spring2018/ho.html[236700 - Software Design, Spring2018 - Course Material]
+** https://refactoring.com[Refactoring]
+** http://www.javiergarzas.com/2015/09/dummies-vs-stubs-vs-mocks-vs-spies-vs-fakes.html[Javier Garzas - Dependencias en pruebas unitarias]
 * link:{slide-link}[Presentación online en: {slide-link}]
 // * link:{demo-link}[Demos online en: {demo-link}]

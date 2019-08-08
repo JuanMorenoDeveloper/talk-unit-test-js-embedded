@@ -342,15 +342,15 @@ image::tdd-cycle.jpg[]
 * Confianza en el código y los tests.
 
 == Algunas Librerías de Testing para JS
-* link:{https://mochajs.org/}[Mocha]
-* link:{https://jestjs.io/}[Jest]
-* link:{https://jasmine.github.io/}[Jasmine]
-* link:{https://www.chaijs.com/}[Chai]
-* link:{https://qunitjs.com/}[QUnit]
+* https://mochajs.org/[Mocha]
+* https://jestjs.io/[Jest]
+* https://jasmine.github.io/[Jasmine]
+* https://www.chaijs.com/[Chai]
+* https://qunitjs.com/[QUnit]
 
 == Algunas Librerías de Testing para Arduino
-* link:{https://github.com/ianfixes/arduino_ci}[arduino_ci]
-* link:{https://github.com/mmurdoch/arduinounit}[ArduinoUnit]
+* https://github.com/ianfixes/arduino_ci[arduino_ci]
+* https://github.com/mmurdoch/arduinounit[ArduinoUnit]
 
 == Conclusiones
 * El uso de test agrega calidad a los sistemas
