@@ -276,7 +276,6 @@ Ofrece un mejor indicador que la cobertura.
 == Tipos de test doubles
 * Dummies
 * Stubs
-* Spikes
 * Fakes
 * Spies
 * Mocks
